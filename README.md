@@ -3,7 +3,7 @@
 Standalone code snippets with various functions
 
 ## Executor
-Simple threadpool with basic functionality, supports submission of orders.
+Simple thread-safe concurrent threadpool with basic functionality, supports submission of tasks with arguments.
 
 * Requirements:
   - [rigtorp's MPMCQueue](https://github.com/rigtorp/MPMCQueue)
