@@ -5,8 +5,12 @@ Standalone code snippets with various functions
 ## Executor
 Simple threadpool with basic functionality, supports submission of orders.
 
+* Requirements:
+  - [rigtorp's MPMCQueue](https://github.com/rigtorp/MPMCQueue)
+  - C++17/20 compiler with Semaphores support
+
 * Integration:
-Simply copy the associated .h file
+Simply copy the associated .h file and include rigtorp's MPMC Queue
 
 * Usage: 
 
