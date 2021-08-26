@@ -32,19 +32,20 @@ namespace PDL
 
     public:
 
-        explicit Executor(ExecutorConfig* config = nullptr)
+        explicit Executor(ExecutorConfig* creationConfig = nullptr)
             :orderSignal(0), done(false)
         {
-            ExecutorConfig* executorConfig = config;
             if (!executorConfig)
             {
-                executorConfig = new ExecutorConfig();
-                executorConfig->threadCount = EXECUTOR_THREAD_COUNT;
-                executorConfig->capacity = EXECUTOR_QUEUE_CAPACITY;
+                config.threadCount = EXECUTOR_THREAD_COUNT;
+                config.capacity = EXECUTOR_QUEUE_CAPACITY;
             }
-            queue = std::make_unique<rigtorp::MPMCQueue<std::unique_ptr<OrderBase>>>(executorConfig->capacity);
-            threads.resize(executorConfig->threadCount);
-            this->config = *executorConfig;
+            else
+            {
+                config = *creationConfig;
+            }
+            queue = std::make_unique<rigtorp::MPMCQueue<std::unique_ptr<OrderBase>>>(config.capacity);
+            threads.resize(config.threadCount);
 
             std::size_t index = 0;
             for (auto& thread : threads)
